@@ -31,6 +31,9 @@ public class NoteVersionedHibernateImpl implements NoteVersionedDAO{
         Session currentSession = entityManager.unwrap(Session.class);
         Query theQuery = currentSession.createQuery("from NoteVersioned where idNote="+theNoteId);
         List<NoteVersioned> notes = theQuery.getResultList();
+        if(notes.isEmpty()){
+                throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note id="+theNoteId+" not found");
+        }
         return notes;
     }
 

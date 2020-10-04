@@ -42,9 +42,11 @@ public class NoteDAOHibernateImpl implements NoteDAO{
     @Override
     public void save(Note theNote) {
         Session currentSession = entityManager.unwrap(Session.class);
+
         if(theNote.getTitle() == null || theNote.getTitle().isEmpty() || theNote.getContent() == null || theNote.getContent().isEmpty()){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Required fields aren't filled");
         }
+
         if(theNote.getCreated()!=null || theNote.getModified() != null || theNote.getId()!=null || theNote.getVersionNumber()!=null){
                 throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "This field is read-only");
         }
@@ -61,15 +63,14 @@ public class NoteDAOHibernateImpl implements NoteDAO{
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The maximum content length is 255");
         }
 
-            Date date = Calendar.getInstance().getTime();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String strDate = dateFormat.format(date);
-            theNote.setCreated(strDate);
-            theNote.setModified(strDate);
-            theNote.setVersionNumber(1);
-            currentSession.saveOrUpdate(theNote);
-
-            }
+        Date date = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strDate = dateFormat.format(date);
+        theNote.setCreated(strDate);
+        theNote.setModified(strDate);
+        theNote.setVersionNumber(1);
+        currentSession.saveOrUpdate(theNote);
+    }
 
     @Override
     public void deleteById(int theId) {
@@ -81,12 +82,15 @@ public class NoteDAOHibernateImpl implements NoteDAO{
     @Override
     public void update(Note theNote) {
         Session currentSession = entityManager.unwrap(Session.class);
+
         if(theNote.getTitle() == null || theNote.getTitle().isEmpty() || theNote.getContent() == null || theNote.getContent().isEmpty()){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Required fields aren't filled");
         }
+
         if(theNote.getCreated()!=null || theNote.getModified() != null || theNote.getVersionNumber()!=null){
             throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "This field is read-only");
         }
+
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate = dateFormat.format(date);

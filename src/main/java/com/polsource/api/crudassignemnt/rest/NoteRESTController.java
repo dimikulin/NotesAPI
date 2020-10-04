@@ -1,6 +1,5 @@
 package com.polsource.api.crudassignemnt.rest;
 
-import com.polsource.api.crudassignemnt.dao.NoteDAO;
 import com.polsource.api.crudassignemnt.entity.Note;
 import com.polsource.api.crudassignemnt.entity.NoteVersioned;
 import com.polsource.api.crudassignemnt.service.NoteService;
@@ -9,16 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class NoteRESTController {
+
     private NoteService noteService;
     private NoteVersionedService noteVersionedService;
 
@@ -34,6 +29,7 @@ public class NoteRESTController {
         return noteService.findAll();
     }
 
+    // display version history of particular note
     @GetMapping("/notesVersioned/{noteId}")
     public List<NoteVersioned> findAll(@PathVariable int noteId){
         return noteVersionedService.findById(noteId);
@@ -44,7 +40,7 @@ public class NoteRESTController {
     public Note getNote(@PathVariable int noteId){
         Note theNote = noteService.findById(noteId);
         if(theNote == null){
-            throw new RuntimeException("Note id=" + noteId + " not found");
+            throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note id ="+noteId+" not found");
         }
         return theNote;
     }
@@ -52,7 +48,6 @@ public class NoteRESTController {
     // create Note
     @PostMapping("/notes")
     public Note addNote(@RequestBody Note theNote){
-        //theNote.setId(0);
         noteService.save(theNote);
         noteVersionedService.save(noteService.findById(theNote.getId()));
         return theNote;
@@ -65,8 +60,11 @@ public class NoteRESTController {
         if(thisNote == null){
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note not found");
         }
-        noteService.update(theNote);
-        noteVersionedService.save(theNote);
+        if(theNote.getContent().equals(thisNote.getContent()) && theNote.getTitle().equals(thisNote.getTitle())){
+            throw new ResponseStatusException( HttpStatus.UNPROCESSABLE_ENTITY, "No changes have been made");
+        }
+        noteService.update(theNote); // update Note
+        noteVersionedService.save(theNote); // save note versioned to version history
         return  theNote;
     }
 
