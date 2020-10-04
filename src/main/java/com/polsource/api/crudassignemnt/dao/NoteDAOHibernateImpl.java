@@ -45,7 +45,7 @@ public class NoteDAOHibernateImpl implements NoteDAO{
         if(theNote.getTitle() == null || theNote.getTitle().isEmpty() || theNote.getContent() == null || theNote.getContent().isEmpty()){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Required fields aren't filled");
         }
-        if(theNote.getCreated()!=null || theNote.getModified() != null || theNote.getId()!=null){
+        if(theNote.getCreated()!=null || theNote.getModified() != null || theNote.getId()!=null || theNote.getVersionNumber()!=null){
                 throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "This field is read-only");
         }
             Date date = Calendar.getInstance().getTime();
@@ -53,6 +53,7 @@ public class NoteDAOHibernateImpl implements NoteDAO{
             String strDate = dateFormat.format(date);
                 theNote.setCreated(strDate);
                 theNote.setModified(strDate);
+                theNote.setVersionNumber(1);
                 currentSession.saveOrUpdate(theNote);
             }
 
@@ -69,7 +70,7 @@ public class NoteDAOHibernateImpl implements NoteDAO{
         if(theNote.getTitle() == null || theNote.getTitle().isEmpty() || theNote.getContent() == null || theNote.getContent().isEmpty()){
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Required fields aren't filled");
         }
-        if(theNote.getCreated()!=null || theNote.getModified() != null){
+        if(theNote.getCreated()!=null || theNote.getModified() != null || theNote.getVersionNumber()!=null){
             throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "This field is read-only");
         }
         Date date = Calendar.getInstance().getTime();
@@ -77,6 +78,7 @@ public class NoteDAOHibernateImpl implements NoteDAO{
         String strDate = dateFormat.format(date);
         theNote.setCreated(findById(theNote.getId()).getCreated());
         theNote.setModified(strDate);
+        theNote.setVersionNumber(findById(theNote.getId()).getVersionNumber()+1);
         currentSession.merge(theNote);
     }
 }

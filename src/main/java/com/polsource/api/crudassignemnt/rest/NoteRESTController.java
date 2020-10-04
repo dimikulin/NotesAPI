@@ -2,7 +2,9 @@ package com.polsource.api.crudassignemnt.rest;
 
 import com.polsource.api.crudassignemnt.dao.NoteDAO;
 import com.polsource.api.crudassignemnt.entity.Note;
+import com.polsource.api.crudassignemnt.entity.NoteVersioned;
 import com.polsource.api.crudassignemnt.service.NoteService;
+import com.polsource.api.crudassignemnt.service.NoteVersionedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,16 +20,23 @@ import java.util.List;
 @RequestMapping("/api")
 public class NoteRESTController {
     private NoteService noteService;
+    private NoteVersionedService noteVersionedService;
 
     @Autowired
-    public NoteRESTController(NoteService theNoteService){
+    public NoteRESTController(NoteService theNoteService, NoteVersionedService theNoteVersionedService){
         this.noteService = theNoteService;
+        this.noteVersionedService = theNoteVersionedService;
     }
 
     // display all Notes
     @GetMapping("/notes")
     public List<Note> findAll(){
         return noteService.findAll();
+    }
+
+    @GetMapping("/notesVersioned/{noteId}")
+    public List<NoteVersioned> findAll(@PathVariable int noteId){
+        return noteVersionedService.findById(noteId);
     }
 
     // display particular Note
@@ -45,6 +54,7 @@ public class NoteRESTController {
     public Note addNote(@RequestBody Note theNote){
         //theNote.setId(0);
         noteService.save(theNote);
+        noteVersionedService.save(noteService.findById(theNote.getId()));
         return theNote;
     }
 
@@ -56,6 +66,7 @@ public class NoteRESTController {
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note not found");
         }
         noteService.update(theNote);
+        noteVersionedService.save(theNote);
         return  theNote;
     }
 

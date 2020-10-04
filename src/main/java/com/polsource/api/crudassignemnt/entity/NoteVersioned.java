@@ -2,15 +2,14 @@ package com.polsource.api.crudassignemnt.entity;
 
 import javax.persistence.*;
 
-import java.util.Calendar;
-import java.util.Date;
-
 @Entity
-@Table(name="note")
-public class Note {
+@Table(name="noteversioned")
+public class NoteVersioned {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    private Integer idNote;
 
     private String title;
 
@@ -20,13 +19,14 @@ public class Note {
 
     private String modified;
 
-    private Integer versionNumber;
+    public NoteVersioned(){}
 
-    public Note(){}
-
-    public Note(String title, String content) {
+    public NoteVersioned(Integer idNote, String title, String content, String created, String modified) {
+        this.idNote = idNote;
         this.title = title;
         this.content = content;
+        this.created = created;
+        this.modified = modified;
     }
 
     public Integer getId() {
@@ -35,6 +35,14 @@ public class Note {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getIdNote() {
+        return idNote;
+    }
+
+    public void setIdNote(Integer idNote) {
+        this.idNote = idNote;
     }
 
     public String getTitle() {
@@ -69,23 +77,14 @@ public class Note {
         this.modified = modified;
     }
 
-    public Integer getVersionNumber() {
-        return versionNumber;
-    }
-
-    public void setVersionNumber(Integer versionNumber) {
-        this.versionNumber = versionNumber;
-    }
-
     @Override
     public String toString() {
-        return "Note{" +
-                "id=" + id +
+        return "NoteVersioned{" +
+                ", idNote=" + idNote +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", created=" + created +
-                ", modified=" + modified +
-                ", versionNumber=" + versionNumber +
+                ", created='" + created + '\'' +
+                ", modified='" + modified + '\'' +
                 '}';
     }
 }
