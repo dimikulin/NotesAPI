@@ -5,37 +5,35 @@ import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
-
 @Entity
 @Table(name="note")
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+
     private String title;
+
     private String content;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
-    private int versionNumber;
+
+    private String created;
+
+    private String modified;
+
 
     public Note(){}
 
     public Note(String title, String content) {
         this.title = title;
         this.content = content;
-        this.created =  new Date();
-        this.modified = this.created;
-        this.versionNumber = 1;
-        System.out.println(this.created);
+
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,29 +53,22 @@ public class Note {
         this.content = content;
     }
 
-    public Date getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
-    public Date getModified() {
+    public String getModified() {
         return modified;
     }
 
-    public void setModified(Date modified) {
+    public void setModified(String modified) {
         this.modified = modified;
     }
 
-    public int getVersionNumber() {
-        return versionNumber;
-    }
-
-    public void setVersionNumber(int versionNumber) {
-        this.versionNumber = versionNumber;
-    }
 
     @Override
     public String toString() {
@@ -87,7 +78,6 @@ public class Note {
                 ", content='" + content + '\'' +
                 ", created=" + created +
                 ", modified=" + modified +
-                ", versionNumber=" + versionNumber +
                 '}';
     }
 }

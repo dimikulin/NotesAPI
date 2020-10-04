@@ -41,4 +41,10 @@ public class NoteServiceImpl implements NoteService{
     public void deleteById(int theId) {
         noteDAO.deleteById(theId);
     }
+
+    @Override
+    @Transactional
+    public void update(Note theNote) {
+        noteDAO.update(theNote);
+    }
 }
