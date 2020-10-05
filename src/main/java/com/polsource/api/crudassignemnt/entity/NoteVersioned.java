@@ -1,5 +1,7 @@
 package com.polsource.api.crudassignemnt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ import javax.persistence.*;
 public class NoteVersioned {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     private Integer idNote;
@@ -80,7 +83,6 @@ public class NoteVersioned {
     @Override
     public String toString() {
         return "NoteVersioned{" +
-                ", idNote=" + idNote +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", created='" + created + '\'' +

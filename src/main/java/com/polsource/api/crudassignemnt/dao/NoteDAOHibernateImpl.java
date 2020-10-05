@@ -91,6 +91,18 @@ public class NoteDAOHibernateImpl implements NoteDAO{
             throw new ResponseStatusException(HttpStatus.METHOD_NOT_ALLOWED, "This field is read-only");
         }
 
+        if(theNote.getTitle().length()<3){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The minimum title length is 3");
+        }else if(theNote.getTitle().length()>30){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The maximum title length is 30");
+        }
+
+        if(theNote.getContent().length()<10){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The minimum content length is 10");
+        }else if(theNote.getContent().length()>255){
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "The maximum content length is 255");
+        }
+
         Date date = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate = dateFormat.format(date);

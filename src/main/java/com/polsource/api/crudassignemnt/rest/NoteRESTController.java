@@ -6,6 +6,7 @@ import com.polsource.api.crudassignemnt.service.NoteService;
 import com.polsource.api.crudassignemnt.service.NoteVersionedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
@@ -47,15 +48,15 @@ public class NoteRESTController {
 
     // create Note
     @PostMapping("/notes")
-    public Note addNote(@RequestBody Note theNote){
+    public ResponseEntity<String> addNote(@RequestBody Note theNote){
         noteService.save(theNote);
         noteVersionedService.save(noteService.findById(theNote.getId()));
-        return theNote;
+        return new ResponseEntity<>("Note was added!", HttpStatus.OK);
     }
 
     // update Note
     @PutMapping("/notes")
-    public Note updateNote(@RequestBody Note theNote){
+    public ResponseEntity<String> updateNote(@RequestBody Note theNote){
         Note thisNote = noteService.findById(theNote.getId());
         if(thisNote == null){
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note not found");
@@ -65,17 +66,17 @@ public class NoteRESTController {
         }
         noteService.update(theNote); // update Note
         noteVersionedService.save(theNote); // save note versioned to version history
-        return  theNote;
+        return new ResponseEntity<>("Note was modified!", HttpStatus.OK);
     }
 
     // delete Note
     @DeleteMapping("/notes/{noteId}")
-    public String deleteNote(@PathVariable int noteId){
+    public ResponseEntity<String> deleteNote(@PathVariable int noteId){
         Note theNote = noteService.findById(noteId);
         if(theNote == null){
             throw new ResponseStatusException( HttpStatus.NOT_FOUND, "Note id="+noteId+" not found");
         }
         noteService.deleteById(noteId);
-        return "Deleted note id="+noteId;
+        return new ResponseEntity<>("Deleted note id = "+noteId, HttpStatus.OK);
     }
 }
