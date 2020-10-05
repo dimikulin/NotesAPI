@@ -53,6 +53,8 @@ Content-Type: application/json
 ```
 /api/notes [PUT]
 
+Content-Type: application/json
+
 {
   "id" : 1,
   "title" : "Champions League",
