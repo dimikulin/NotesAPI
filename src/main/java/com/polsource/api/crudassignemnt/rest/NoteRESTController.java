@@ -51,7 +51,7 @@ public class NoteRESTController {
     public ResponseEntity<String> addNote(@RequestBody Note theNote){
         noteService.save(theNote);
         noteVersionedService.save(noteService.findById(theNote.getId()));
-        return new ResponseEntity<>("Note was added!", HttpStatus.OK);
+        return new ResponseEntity<>("Note was added!", HttpStatus.CREATED);
     }
 
     // update Note
