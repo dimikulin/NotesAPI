@@ -18,3 +18,56 @@ Project is created with:
 * Hibernate,
 * Maven,
 * H2 Database.
+
+## Endpoints
+
+The most common HTTP status codes are returned when there is an error.
+
+# Add note
+
+```json
+/api/notes [POST]
+
+Content-Type: application/json
+
+{
+  "title" : "Football",
+	"content" : "PSG are expected to announce the €4m loan with €16m obligation to buy signing of 29-year-old defensive midfielder Danilo Pereira from Porto."
+}
+```
+
+# Get a particular note
+
+```json
+/api/notes/{idNote} [GET]
+```
+
+# Get all notes
+
+```json
+/api/notes [GET]
+```
+
+# Update a note
+
+```json
+/api/notes [PUT]
+
+{
+  "id" : 1,
+  "title" : "Champions League",
+	"content" : "Real Madrid won the UEFA Champions League trophy in the 2016/2017 season."
+}
+```
+
+# Delete a note
+
+```json
+/api/notes/{idNote} [DELETE]
+```
+
+# Get version history of particular note
+
+```json
+/api/notesVersioned/{idNote} [GET]
+```
