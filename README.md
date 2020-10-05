@@ -19,6 +19,12 @@ Project is created with:
 * Maven,
 * H2 Database.
 
+## Setup
+You can launch the program in two ways:
+
+* by downloading the project via e.g. IntellIJ and starting the application from there,
+* by launching crudassignemnt.jar (/out/artifacts/crudassignemnt_jar)
+
 ## Endpoints
 
 The most common HTTP status codes are returned when there is an error.
