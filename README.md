@@ -32,7 +32,7 @@ Content-Type: application/json
 
 {
   "title" : "Football",
-	"content" : "PSG are expected to announce the €4m loan with €16m obligation to buy signing of 29-year-old defensive midfielder Danilo Pereira from Porto."
+  "content" : "PSG are expected to announce the €4m loan with €16m obligation to buy signing of 29-year-old defensive midfielder Danilo Pereira from Porto."
 }
 ```
 
