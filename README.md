@@ -56,7 +56,7 @@ Content-Type: application/json
 {
   "id" : 1,
   "title" : "Champions League",
-	"content" : "Real Madrid won the UEFA Champions League trophy in the 2016/2017 season."
+  "content" : "Real Madrid won the UEFA Champions League trophy in the 2016/2017 season."
 }
 ```
 
