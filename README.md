@@ -23,9 +23,9 @@ Project is created with:
 
 The most common HTTP status codes are returned when there is an error.
 
-# Add note
+### Add note
 
-```json
+```
 /api/notes [POST]
 
 Content-Type: application/json
@@ -36,21 +36,21 @@ Content-Type: application/json
 }
 ```
 
-# Get a particular note
+### Get a particular note
 
-```json
+```
 /api/notes/{idNote} [GET]
 ```
 
-# Get all notes
+### Get all notes
 
-```json
+```
 /api/notes [GET]
 ```
 
-# Update a note
+### Update a note
 
-```json
+```
 /api/notes [PUT]
 
 {
@@ -60,14 +60,14 @@ Content-Type: application/json
 }
 ```
 
-# Delete a note
+### Delete a note
 
-```json
+```
 /api/notes/{idNote} [DELETE]
 ```
 
-# Get version history of particular note
+### Get version history of particular note
 
-```json
+```
 /api/notesVersioned/{idNote} [GET]
 ```
