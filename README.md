@@ -1,6 +1,7 @@
 # Notes API
 
 RESTful API webservice that manages and stores in database simple notes.
+In this assignment, I haven't created additinal webservice. I have created additional endpoint, that return whole history of changes for particular note.
 
 ## Description
 
