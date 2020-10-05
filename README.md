@@ -22,9 +22,10 @@ Project is created with:
 
 ## Setup
 You can launch the program in two ways:
-
 * by downloading the project via e.g. IntellIJ and starting the application from there,
 * by launching crudassignemnt.jar (/out/artifacts/crudassignemnt_jar)
+
+You don't need to configure the database because the interface uses H2 Database.
 
 ## Endpoints
 
