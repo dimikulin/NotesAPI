@@ -23,7 +23,20 @@ Project is created with:
 
 The most common HTTP status codes are returned when there is an error.
 
+SR. No. |	API Name | HTTP Method	| Path	| Status Code	| Description 
+--- | --- | --- | --- |--- |--- |
+(1)	| GET Notes	| GET	| http://localhost:8080/api/notes	| 200 (OK)	| Get all notes
+(2) |	POST Note	| POST	| http://localhost:8080/api/notes	| 201 (Created)	| Add a note
+(3) |	GET Note	| GET	| http://localhost:8080/api/notes/{idNote}	| 200 (OK)	| Get a particular note
+(4) |	PUT Note	| PUT | http://localhost:8080/api/notes	| 200 (OK)	| Update a note
+(5) |	DELETE Note	| DELETE	|http://localhost:8080/api/notes/{idNote}	| 200 (OK)	| Delete a note
+(6) |	GET Note Versioned	| GET	|http://localhost:8080/api/notesVersioned/{idNote}	| 200 (OK)	| Get a version history note
+
+
+
 ### Add note
+
+Minimum title length is 3 and maximum length is 30. Minimum content length is 10 and maximum length is 255.
 
 ```
 /api/notes [POST]
@@ -36,11 +49,20 @@ Content-Type: application/json
 }
 ```
 
+
+Example of use:
+
+![zdjecie](https://user-images.githubusercontent.com/45290627/95105729-df8baa00-0737-11eb-8234-b8ae423a8a54.JPG)
+
 ### Get a particular note
 
 ```
 /api/notes/{idNote} [GET]
 ```
+
+Example of use:
+
+![image](https://user-images.githubusercontent.com/45290627/95105849-05b14a00-0738-11eb-9795-ae9ddfbaa388.png)
 
 ### Get all notes
 
@@ -48,7 +70,13 @@ Content-Type: application/json
 /api/notes [GET]
 ```
 
+Example of use:
+
+![image](https://user-images.githubusercontent.com/45290627/95106062-4f9a3000-0738-11eb-81c1-ab3bee9cf1f3.png)
+
 ### Update a note
+
+You cannot update a note without making changes.
 
 ```
 /api/notes [PUT]
@@ -62,14 +90,24 @@ Content-Type: application/json
 }
 ```
 
+Example of use:
+
+![image](https://user-images.githubusercontent.com/45290627/95106256-9556f880-0738-11eb-9f8e-ce4c5a150343.png)
+
 ### Delete a note
 
 ```
 /api/notes/{idNote} [DELETE]
 ```
+Example of use:
+
+![image](https://user-images.githubusercontent.com/45290627/95106343-b15a9a00-0738-11eb-8a2d-52477970afc4.png)
 
 ### Get version history of particular note
 
 ```
 /api/notesVersioned/{idNote} [GET]
 ```
+Example of use:
+
+![image](https://user-images.githubusercontent.com/45290627/95106476-dcdd8480-0738-11eb-9ff4-c3682df4b967.png)
